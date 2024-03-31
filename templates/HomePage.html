@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../static/style.css"> 
+</head>
+<body>
+    <div class="outer" style="align-items: center;justify-content: center;">
+        <div class="header">
+            <div class="logo">Book Scouting</div>
+            <div class="login-btn">
+                <button id="loginBtn">Login</button>
+            </div>
+            <div class="profile" style="align-items: center; justify-content: center">Profile</div>
+        </div>
+        <div class="content"> 
+            <div class="book-img">
+                <img src="" alt="This is book image" width="540px" height="400px">
+            </div>
+        </div>
+        <hr>
+        <div class="book-section">
+            <div class="book-header">
+                <div class="title">Shop Books</div>
+                <div class="search-bar">
+                    <input type="text" value="" placeholder="Search here">
+                </div>
+                <div class="search-btn">
+                    <button>Search</button>
+                </div>
+            </div>
+            <div class="book-products">
+                {% for i in all_books %}   
+                <div class="book">
+                    <p>{{i[5]}}</p>
+                    <a href="{{url_for('getProducts',book_id=i[0],title=i[5],img_url=i[2],price=i[3],desc=i[4])}}"><img src="{{i[2]}}" alt="Book1" width="250px" height="300px"></a>
+                    <p>Price : {{ i[3] }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="loginPopup" class="popup">
+                <div class="content">
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <h2>Login</h2>  
+                    <div class="login-options">
+                        <label class="switch">
+                            <input type="checkbox" id="toggleForm">
+                            <span class="slider round"></span>
+                        </label>
+                        <span id="loginLabel">Sign In</span>
+                    </div>
+                    <form id="signInForm" method="post" action="/login">
+                        <input type="email" id="email" name="signupEmail" placeholder="Email" required>
+                        <input type="password" id="password" name="signupPassword" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                    </form>
+                    <form id="signUpForm" style="display: none;" action="/signUp" method="post">
+                        <input type="text" id="fname" name="fname" placeholder="First Name" required>
+                        <input type="text" id="lname" name="lname" placeholder="Last Name" required>
+                        <input type="tel" id="contact" name="contact" placeholder="Number" required>
+                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required>
+                        <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required>
+                        
+                        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <script>
+        const loginBtn = document.getElementById('loginBtn');
+        const loginPopup = document.getElementById('loginPopup');
+        const toggleForm = document.getElementById('toggleForm');
+        const signInForm = document.getElementById('signInForm');
+        const signUpForm = document.getElementById('signUpForm');
+        const loginLabel = document.getElementById('loginLabel');
+
+        
+        loginBtn.addEventListener('click', () => {
+            loginPopup.style.display = 'flex';
+        });
+
+        function closePopup() {
+            loginPopup.style.display = 'none';
+        }
+
+        toggleForm.addEventListener('change', function() {
+            if (this.checked) {
+                loginLabel.textContent = 'Sign Up';
+                signInForm.style.display = 'none';
+                signUpForm.style.display = 'block';
+            } else {
+                loginLabel.textContent = 'Sign In';
+                signInForm.style.display = 'block';
+                signUpForm.style.display = 'none';
+            }
+        });
+
+        function login() {
+            if (toggleForm.checked) {
+                // Handle sign up form submission
+                const email = document.getElementById('signupEmail').value;
+                const password = document.getElementById('signupPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                // Add your sign up logic here
+                console.log('Sign up form submitted');
+            } else {
+                // Handle sign in form submission
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                // Add your sign in logic here
+                console.log('Sign in form submitted');
+            }
+            closePopup();
+        }
+
+    </script>
+</body>
+</html>

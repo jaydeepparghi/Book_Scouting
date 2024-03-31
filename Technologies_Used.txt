@@ -1,0 +1,11 @@
+Frontend
+1. HTML
+2. CSS
+3. JavaScript
+
+Backend
+1. Python
+2. Flask
+
+Database
+3. MySQL

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="outer">
+        <div class="header">
+            <h2>
+                Cart Products
+            </h2>
+        </div>
+        <hr>
+        <div class="books-section">
+            {% for i in in_cart_books %}   
+            <div class="book">
+                <img src="{{i[0]}}" alt="Book Image">
+                <h4>{{i[1]}}</h4>
+                <h4>Price : {{i[2]}}</h4>
+                    
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

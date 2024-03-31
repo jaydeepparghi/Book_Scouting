@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../static/style.css"> 
+</head>
+<body>
+    <div class="outer" style="align-items: center;justify-content: center;">
+        <div class="header">
+            <div class="logo">Book Scouting</div>
+            <div class="login-btn">
+                <button id="viewCartBtn">View Cart</button>
+            </div>
+            <div class="profile" style="align-items: center; justify-content: center">Profile</div>
+        </div>
+        <div class="content"> 
+            <div class="book-img">
+                <img src="" alt="This is book image" width="540px" height="400px">
+            </div>
+        </div>
+        <hr>
+        <div class="book-section">
+            <div class="book-header">
+                <div class="title">Shop Books</div>
+                <div class="search-bar">
+                    <input type="text" value="" placeholder="Search here">
+                </div>
+                <div class="search-btn">
+                    <button>Search</button>
+                </div>
+            </div>
+            <div class="book-products">
+                {% for i in all_books %}   
+                <div class="book">
+                    <p>{{i[5]}}</p>
+                    <a href="{{url_for('getProducts',book_id=i[0],title=i[5],img_url=i[2],price=i[3],desc=i[4])}}"><img src="{{i[2]}}" alt="Book1" width="250px" height="300px"></a>
+                    <p>Price : {{ i[3] }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div> 
+    </div>
+</body>
+</html>
